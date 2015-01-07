@@ -44,7 +44,7 @@ public class VoiceActivity extends Activity {
 		tvNumber = (TextView) findViewById(R.id.tvNumber);
 		tvResult = (TextView) findViewById(R.id.tvResult);
 
-		getId("01034648576");
+		//getId("01034648576");
 
 		mIsStop = getIntent().getBooleanExtra("stop", false);
 		mNumber = getIntent().getStringExtra("number");
