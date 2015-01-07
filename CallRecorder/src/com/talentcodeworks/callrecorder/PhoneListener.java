@@ -13,6 +13,8 @@ public class PhoneListener extends PhoneStateListener
     private Context context;
     
     private Handler mHandler = new Handler();
+    
+    private String mNumber = "";
 
     public PhoneListener(Context c) {
         Log.i("CallRecorder", "PhoneListener constructor");
@@ -21,11 +23,11 @@ public class PhoneListener extends PhoneStateListener
 
     public void onCallStateChanged (int state, final String incomingNumber)
     {
-        Log.d("CallRecorder", "PhoneListener::onCallStateChanged state:" + state + " incomingNumber:" + incomingNumber);
+        Log.d("LDK", "PhoneListener::onCallStateChanged state:" + state + " incomingNumber:" + incomingNumber);
 
         switch (state) {
         case TelephonyManager.CALL_STATE_IDLE:
-            Log.d("CallRecorder", "CALL_STATE_IDLE, stoping recording");
+            Log.d("LDK", "CALL_STATE_IDLE, stoping recording");
             //Boolean stopped = context.stopService(new Intent(context, RecordService.class));
             //Log.i("CallRecorder", "stopService for RecordService returned " + stopped);
             Intent intent = new Intent(context, VoiceActivity.class);
@@ -34,10 +36,11 @@ public class PhoneListener extends PhoneStateListener
 	        context.startActivity(intent);
             break;
         case TelephonyManager.CALL_STATE_RINGING:
-            Log.d("CallRecorder", "CALL_STATE_RINGING");
+            Log.d("LDK", "CALL_STATE_RINGING");
+            mNumber = incomingNumber;
             break;
         case TelephonyManager.CALL_STATE_OFFHOOK:
-            Log.d("CallRecorder", "CALL_STATE_OFFHOOK starting recording");
+            Log.d("LDK", "CALL_STATE_OFFHOOK starting recording");
             /*Intent callIntent = new Intent(context, RecordService.class);
             ComponentName name = context.startService(callIntent);
             if (null == name) {
@@ -62,7 +65,7 @@ public class PhoneListener extends PhoneStateListener
 				public void run() {
 					 Intent intent = new Intent(context, VoiceActivity.class);
 			         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			         intent.putExtra("number", incomingNumber);
+			         intent.putExtra("number", mNumber);
 			         context.startActivity(intent);
 				}
 			}, 1000);

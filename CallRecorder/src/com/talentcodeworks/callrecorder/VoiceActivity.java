@@ -28,10 +28,10 @@ public class VoiceActivity extends Activity {
 	private TextView tvResult;
 
 	private boolean mIsStop = false;
-	private String mNumber = "";
+	private String mNumber = " ";
 
 	StringBuilder sb = new StringBuilder();
-	private String mContactName;
+	private String mContactName = " ";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +49,10 @@ public class VoiceActivity extends Activity {
 		mIsStop = getIntent().getBooleanExtra("stop", false);
 		mNumber = getIntent().getStringExtra("number");
 		getId(mNumber);
+		
+		Log.d("LDK", "number:" + mNumber);
 
-		if (mIsStop) {
-
-		} else {
-			callVoiceReconition();
-		}
+		callVoiceReconition();
 	}
 
 	@Override
@@ -108,31 +106,35 @@ public class VoiceActivity extends Activity {
 	}
 
 	private void getId(String phoneNumber) {
-		ContentResolver contentResolver = getContentResolver();
-
-		Uri uri = Uri.withAppendedPath(
-				ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
-				Uri.encode(phoneNumber));
-
-		String[] projection = new String[] {
-				ContactsContract.PhoneLookup.DISPLAY_NAME,
-				ContactsContract.PhoneLookup._ID };
-
-		Cursor cursor = contentResolver
-				.query(uri, projection, null, null, null);
-
-		if (cursor != null) {
-			while (cursor.moveToNext()) {
-				mContactName = cursor
-						.getString(cursor
-								.getColumnIndexOrThrow(ContactsContract.PhoneLookup.DISPLAY_NAME));
-				String contactId = cursor
-						.getString(cursor
-								.getColumnIndexOrThrow(ContactsContract.PhoneLookup._ID));
-				Log.d(TAG, "contactMatch name: " + mContactName);
-				Log.d(TAG, "contactMatch id: " + contactId);
+		try {
+			ContentResolver contentResolver = getContentResolver();
+	
+			Uri uri = Uri.withAppendedPath(
+					ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
+					Uri.encode(phoneNumber));
+	
+			String[] projection = new String[] {
+					ContactsContract.PhoneLookup.DISPLAY_NAME,
+					ContactsContract.PhoneLookup._ID };
+	
+			Cursor cursor = contentResolver
+					.query(uri, projection, null, null, null);
+	
+			if (cursor != null) {
+				while (cursor.moveToNext()) {
+					mContactName = cursor
+							.getString(cursor
+									.getColumnIndexOrThrow(ContactsContract.PhoneLookup.DISPLAY_NAME));
+					String contactId = cursor
+							.getString(cursor
+									.getColumnIndexOrThrow(ContactsContract.PhoneLookup._ID));
+					Log.d(TAG, "contactMatch name: " + mContactName);
+					Log.d(TAG, "contactMatch id: " + contactId);
+				}
+				cursor.close();
 			}
-			cursor.close();
+		} catch(IllegalArgumentException e) {
+			e.printStackTrace();
 		}
 		
 		tvName.setText(mContactName);
