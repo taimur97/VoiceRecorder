@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="14" android:targetSdkVersion="19" />
+        android:minSdkVersion="8" android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -76,8 +76,8 @@
         <activity
             android:name=".VoiceActivity"
             android:label="@string/title_activity_dummy"
-            android:launchMode="singleInstance" >
-            
+            android:launchMode="singleTask">
+
         </activity>
     </application>
 

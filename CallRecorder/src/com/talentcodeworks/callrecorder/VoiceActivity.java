@@ -11,11 +11,18 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.ContactsContract;
+import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class VoiceActivity extends Activity {
 
@@ -29,9 +36,23 @@ public class VoiceActivity extends Activity {
 
 	private boolean mIsStop = false;
 	private String mNumber = " ";
-
-	StringBuilder sb = new StringBuilder();
 	private String mContactName = " ";
+	
+	private String mText = "";
+	
+	private Handler mHandler = new Handler(){
+
+		@Override
+		public void handleMessage(Message msg) {
+			switch(msg.what) {
+			case 0:
+				callVoiceReconition();
+				break;
+			}
+		}
+		
+	};
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,21 +78,26 @@ public class VoiceActivity extends Activity {
 
 	@Override
 	protected void onNewIntent(Intent intent) {
-		mIsStop = getIntent().getBooleanExtra("stop", false);
+		Log.d("LDK", "onNewIntent");
+		mIsStop = intent.getBooleanExtra("stop", false);
 		super.onNewIntent(intent);
 	}
 
 	private void callVoiceReconition() {
-		// if (isConnected()) {
-		Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-		intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-				RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-		startActivityForResult(intent, REQUEST_CODE);
-		// } else {
-		// Toast.makeText(getApplicationContext(),
-		// "Plese Connect to Internet", Toast.LENGTH_LONG)
-		// .show();
-		// }
+		if (isConnected()) {
+			Intent i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);            //intent 생성
+			i.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getPackageName());    //호출한 패키지
+			i.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ko-KR");                            //음성인식 언어 설정
+			i.putExtra(RecognizerIntent.EXTRA_PROMPT, "");                     //사용자에게 보여 줄 글자
+
+			startActivityForResult(i, REQUEST_CODE);                                                //구글 음성인식 실행
+		}
+		else {
+			Toast.makeText(getApplicationContext(),
+			"Plese Connect to Internet", Toast.LENGTH_LONG)
+			.show();
+		}
+
 	}
 
 	public boolean isConnected() {
@@ -83,23 +109,31 @@ public class VoiceActivity extends Activity {
 			return false;
 		}
 	}
+	
+	
+
+	@Override
+	protected void onDestroy() {
+		mHandler.removeMessages(0);
+		super.onDestroy();
+	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		Log.d("LDK", "requestCode:" + requestCode + " resultCode:" + resultCode);
+		
 		if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
 			ArrayList<String> mStringList = data
 					.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-
-			for (String str : mStringList) {
-				sb.append(str);
-			}
-
+			
+			mText += mStringList.get(0) + " ";
+			
 			// Toast.makeText(this, sb, Toast.LENGTH_LONG).show();
-			tvResult.setText(sb.toString());
-
-			if (!mIsStop) {
-				callVoiceReconition();
-			}
+			tvResult.setText(mText);
+		}
+		
+		if (!mIsStop) {
+			mHandler.sendEmptyMessageDelayed(0, 500);
 		}
 
 		super.onActivityResult(requestCode, resultCode, data);

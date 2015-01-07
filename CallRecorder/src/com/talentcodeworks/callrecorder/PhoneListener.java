@@ -55,6 +55,8 @@ public class PhoneListener extends PhoneStateListener
 				public void run() {
 		            AudioManager audioManager =  (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
 		            audioManager.setMode(AudioManager.MODE_IN_CALL);
+		            int sb2value = audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL);
+		            audioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL, sb2value, 0);
 		            audioManager.setSpeakerphoneOn(true);
 				}
 			}, 500);
