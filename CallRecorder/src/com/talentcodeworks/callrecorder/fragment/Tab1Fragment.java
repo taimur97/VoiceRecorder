@@ -1,5 +1,6 @@
 package com.talentcodeworks.callrecorder.fragment;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -47,6 +48,7 @@ public class Tab1Fragment extends Fragment {
             String callType = managedCursor.getString(type);
             String callDate = managedCursor.getString(date);
             Date callDayTime = new Date(Long.valueOf(callDate));
+            String strDate = new SimpleDateFormat("MM-dd HH:mm:ss").format(callDayTime);
             String callDuration = managedCursor.getString(duration);
             String dir = null;
             int dircode = Integer.parseInt(callType);
@@ -71,7 +73,8 @@ public class Tab1Fragment extends Fragment {
             Callslog calllog = new Callslog();
             calllog.type = dircode;
             calllog.name = phNumber;
-            calllog.date = callDayTime.toString();
+            calllog.date = strDate;
+            mCallLogList.add(calllog);
         }
         managedCursor.close();
         

@@ -61,6 +61,10 @@ public class MainActivity extends Activity {
 		img32 = (ImageView) findViewById(R.id.img32);
 		img41 = (ImageView) findViewById(R.id.img41);
 		img42 = (ImageView) findViewById(R.id.img42);
+		
+		//first tab click
+		mFragment = new Tab1Fragment();
+		mFm.beginTransaction().replace(R.id.container, mFragment).commit();
 	}
 
 	private void refreshTab(int index) {
