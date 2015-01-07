@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CallRecorder</string>
+    <string name="recording_enabled_prompt">Record during calls</string>
+    <string name="audio_source_prompt">Audio source</string>
+    <string name="audio_format_prompt">Audio format</string>
+    <string name="title_activity_main2">MainActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_dummy">DummyActivity</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

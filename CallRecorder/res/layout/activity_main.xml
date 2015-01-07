@@ -1,0 +1,80 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#b0b0b0"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent" android:layout_height="74dp"
+        android:background="@drawable/header_base" >
+
+        <RelativeLayout
+            android:id="@+id/tab1"
+            android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/img11"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/call_hd_st" />
+            <ImageView
+                android:id="@+id/img12"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true" android:layout_alignParentBottom="true"
+                android:src="@drawable/header_select" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/tab2"
+            android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/img21"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/adress_hd_en" />
+            <ImageView
+                android:id="@+id/img22"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true" android:layout_alignParentBottom="true"
+                android:src="@drawable/header_select"
+                android:visibility="invisible" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/tab3"
+            android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/img31"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/keypad_hd_en" />
+            <ImageView
+                android:id="@+id/img32"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true" android:layout_alignParentBottom="true"
+                android:src="@drawable/header_select" 
+                android:visibility="invisible"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/tab4"
+            android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/img41"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/cog_hd_en" />
+            <ImageView
+                android:id="@+id/img42"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true" android:layout_alignParentBottom="true"
+                android:src="@drawable/header_select" 
+                android:visibility="invisible"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+    
+  	<FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </FrameLayout>
+
+</LinearLayout>
