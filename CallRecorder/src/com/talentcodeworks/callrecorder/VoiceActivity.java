@@ -46,7 +46,9 @@ public class VoiceActivity extends Activity {
 		public void handleMessage(Message msg) {
 			switch(msg.what) {
 			case 0:
-				callVoiceReconition();
+				if (!mIsStop) {
+					callVoiceReconition();
+				}
 				break;
 			}
 		}
