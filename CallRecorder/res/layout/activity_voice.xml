@@ -1,0 +1,87 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#b0b0b0"
+    android:orientation="vertical" >
+    
+    <RelativeLayout
+        android:layout_width="match_parent" android:layout_height="74dp"
+        android:background="@drawable/header_base" >
+        
+		<ImageView
+            android:id="@+id/ivProfile"
+            android:layout_width="35dp" android:layout_height="35dp"
+            android:layout_alignParentLeft="true" android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ic_perm_group_personal_info" />
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_alignParentRight="true" android:layout_alignParentTop="true"
+            android:layout_marginRight="24dp" android:layout_marginTop="19dp"
+            android:text="백경인" android:textSize="24.5sp" android:textColor="#121212"/>
+
+        <TextView
+            android:id="@+id/tvNumber"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tvName" android:layout_below="@+id/tvName"
+            android:layout_marginTop="3dp"
+            android:text="010-1234-1234" android:textSize="10sp" android:textColor="#7e7a7a" />
+        
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent" android:layout_height="48dp"
+        android:background="@drawable/bezel" >
+
+        <RelativeLayout
+            android:id="@+id/tab1"
+            android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/img11"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/icon_sound_on" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/tab2"
+            android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/img21"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/icon_mic_on" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/tab3"
+            android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/img31"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/icon_keypad_en" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/tab4"
+            android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/img41"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/icon_callend_bf" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:paddingLeft="10dp" android:paddingRight="10dp" android:paddingTop="13dp"
+        android:background="#ffffff" >
+	    <TextView
+	        android:id="@+id/tvResult"
+	        android:layout_width="match_parent" android:layout_height="match_parent"
+	        android:text="" android:textSize="16sp" android:textColor="#121212" />
+    </LinearLayout>
+
+</LinearLayout>

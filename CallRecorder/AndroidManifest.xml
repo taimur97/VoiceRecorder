@@ -68,14 +68,16 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main2" >
+            
+        </activity>
+        <activity
+            android:name=".VoiceActivity"
+            android:label="@string/title_activity_dummy"
+            android:launchMode="singleInstance" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".DummyActivity"
-            android:label="@string/title_activity_dummy" >
         </activity>
     </application>
 

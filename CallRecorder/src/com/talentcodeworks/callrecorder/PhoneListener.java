@@ -19,7 +19,7 @@ public class PhoneListener extends PhoneStateListener
         context = c;
     }
 
-    public void onCallStateChanged (int state, String incomingNumber)
+    public void onCallStateChanged (int state, final String incomingNumber)
     {
         Log.d("CallRecorder", "PhoneListener::onCallStateChanged state:" + state + " incomingNumber:" + incomingNumber);
 
@@ -28,6 +28,10 @@ public class PhoneListener extends PhoneStateListener
             Log.d("CallRecorder", "CALL_STATE_IDLE, stoping recording");
             //Boolean stopped = context.stopService(new Intent(context, RecordService.class));
             //Log.i("CallRecorder", "stopService for RecordService returned " + stopped);
+            Intent intent = new Intent(context, VoiceActivity.class);
+	        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	        intent.putExtra("stop", true);
+	        context.startActivity(intent);
             break;
         case TelephonyManager.CALL_STATE_RINGING:
             Log.d("CallRecorder", "CALL_STATE_RINGING");
@@ -49,8 +53,6 @@ public class PhoneListener extends PhoneStateListener
 		            AudioManager audioManager =  (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
 		            audioManager.setMode(AudioManager.MODE_IN_CALL);
 		            audioManager.setSpeakerphoneOn(true);
-		            
-
 				}
 			}, 500);
 
@@ -58,9 +60,10 @@ public class PhoneListener extends PhoneStateListener
             mHandler.postDelayed(new Runnable() {
 				@Override
 				public void run() {
-					 Intent intent = new Intent(context, DummyActivity.class);
-			            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			            context.startActivity(intent);
+					 Intent intent = new Intent(context, VoiceActivity.class);
+			         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			         intent.putExtra("number", incomingNumber);
+			         context.startActivity(intent);
 				}
 			}, 1000);
            
